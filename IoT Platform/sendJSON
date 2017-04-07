@@ -21,47 +21,65 @@ WiFiClient wifiClient;
 PubSubClient client(server, 1883, NULL, wifiClient);
 
 void setup() {
- Serial.begin(115200);
- Serial.println();
+  Serial.begin(115200);
+  Serial.println();
 
- Serial.print("Connecting to "); Serial.print(ssid);
- WiFi.begin(ssid, password);
- while (WiFi.status() != WL_CONNECTED) {
- delay(500);
- Serial.print(".");
- } 
- Serial.println("");
+  Serial.print("Connecting to "); Serial.print(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
 
- Serial.print("WiFi connected, IP address: "); Serial.println(WiFi.localIP());
+  Serial.print("WiFi connected, IP address: "); Serial.println(WiFi.localIP());
+
+  pinMode(D1,INPUT);
 }
 
 int counter = 0;
+int counterPIR = 0;
+
+
 
 void loop() {
 
- if (!client.connected()) {
- Serial.print("Reconnecting client to ");
- Serial.println(server);
- while (!client.connect(clientId, authMethod, token)) {
- Serial.print(".");
- delay(500);
- }
- Serial.println();
- }
+  counter++;
 
- String payload = "{\"d\":{\"Name\":\"ESP-PIR\"";
- payload += ",\"counter\":";
- payload += counter++;
- payload += "}}";
- 
- Serial.print("Sending payload: ");
- Serial.println(payload);
- 
- if (client.publish(topic, (char*) payload.c_str())) {
- Serial.println("Publish ok");
- } else {
- Serial.println("Publish failed");
- }
+  if (digitalRead(D1) == 1) {
+    counterPIR++;
+  }
 
- delay(5000);
+  if (counter == 100) {
+
+    if (!client.connected()) {
+      Serial.print("Reconnecting client to ");
+      Serial.println(server);
+      while (!client.connect(clientId, authMethod, token)) {
+        Serial.print(".");
+        delay(500);
+      }
+      Serial.println();
+    }
+
+    String payload = "{\"d\":{\"Name\":\"ESP-PIR\"";
+    payload += ",\"PIR\":";
+    payload += counterPIR;
+    payload += "}}";
+
+    Serial.print("Sending payload: ");
+    Serial.println(payload);
+
+    counter = 0;
+    counterPIR = 0;
+
+    if (client.publish(topic, (char*) payload.c_str())) {
+      Serial.println("Publish ok");
+    } else {
+      Serial.println("Publish failed");
+    }
+
+  }
+
+  delay(100);
 }
