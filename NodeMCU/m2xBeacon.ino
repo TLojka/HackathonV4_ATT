@@ -43,35 +43,36 @@ void loop() {
 }
 
 void ble_event(BLE_PROXIMITY_EVENT eventArgs) {
-  //if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_LOST) {
-  //  Serial.println("No device...");
-  //}
+//  if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_LOST) {
+//    Serial.println("No device...");
+//  }
   if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_APPROACH) {
     major = eventArgs.device.hilo.substring(0, 4).toInt();
     minor = eventArgs.device.hilo.substring(4, 8).toInt();
     rssi = eventArgs.device.rssi;
-    //Serial.println(eventArgs.device.minorPlusRssi);
   }
   if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_MOVED) {
     major = eventArgs.device.hilo.substring(0, 4).toInt();
     minor = eventArgs.device.hilo.substring(4, 8).toInt();
     rssi = eventArgs.device.rssi;
-    //Serial.println(eventArgs.device.minorPlusRssi);
   }
-  if (rssi > -75 && minor == 3) {
-    Serial.println("31");
-    m2xClient.updateStreamValue(device, stream, "31");
-  }
-  if (rssi <= -75 && minor == 3) {
-    Serial.println("30");
-    m2xClient.updateStreamValue(device, stream, "30");
-  }
-  if (rssi > -75 && minor == 2) {
-    Serial.println("21");
-    m2xClient.updateStreamValue(device, stream, "21");
-  }
-  if (rssi <= -75 && minor == 2) {
-    Serial.println("20");
-    m2xClient.updateStreamValue(device, stream, "20");
-  }
+
+  //int eventArgs.device.minorPlusRssi 
+  
+//  if (rssi > -75 && minor == 3) {
+//    Serial.println("31");
+//    m2xClient.updateStreamValue(device, stream, "31");
+//  }
+//  if (rssi <= -75 && minor == 3) {
+//    Serial.println("30");
+//    m2xClient.updateStreamValue(device, stream, "30");
+//  }
+//  if (rssi > -75 && minor == 2) {
+//    Serial.println("21");
+//    m2xClient.updateStreamValue(device, stream, "21");
+//  }
+//  if (rssi <= -75 && minor == 2) {
+//    Serial.println("20");
+//    m2xClient.updateStreamValue(device, stream, "20");
+//  }
 }
