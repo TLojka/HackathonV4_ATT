@@ -34,12 +34,12 @@ void setup() {
 
   Serial.print("WiFi connected, IP address: "); Serial.println(WiFi.localIP());
 
-  pinMode(D1,INPUT);
+  pinMode(D1, INPUT);
 }
 
 int counter = 0;
 int counterPIR = 0;
-
+int movement = 0;
 
 
 void loop() {
@@ -62,8 +62,18 @@ void loop() {
       Serial.println();
     }
 
+    if (counterPIR == 0) {
+      movement = 0;
+    }
+    else {
+      movement = 1;
+    }
+
+
     String payload = "{\"d\":{\"Name\":\"ESP-PIR\"";
-    payload += ",\"PIR\":";
+    payload += ",\"Activity\":";
+    payload += movement;
+    payload += ",\"Value\":";
     payload += counterPIR;
     payload += "}}";
 
