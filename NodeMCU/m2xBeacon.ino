@@ -50,27 +50,28 @@ void ble_event(BLE_PROXIMITY_EVENT eventArgs) {
     major = eventArgs.device.hilo.substring(0, 4).toInt();
     minor = eventArgs.device.hilo.substring(4, 8).toInt();
     rssi = eventArgs.device.rssi;
+    //Serial.println(eventArgs.device.minorPlusRssi);
   }
   if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_MOVED) {
     major = eventArgs.device.hilo.substring(0, 4).toInt();
     minor = eventArgs.device.hilo.substring(4, 8).toInt();
     rssi = eventArgs.device.rssi;
-
+    //Serial.println(eventArgs.device.minorPlusRssi);
   }
-  if (rssi > -75 && minor == 1) {
-    Serial.println("Pacient is in the bed.");
-    m2xClient.updateStreamValue(device, stream, "Pacient is in the bed.");
+  if (rssi > -75 && minor == 3) {
+    Serial.println("31");
+    m2xClient.updateStreamValue(device, stream, "31");
   }
-  if (rssi <= -75 && minor == 1) {
-    Serial.println("Pacient is not in the bed!");
-    m2xClient.updateStreamValue(device, stream, "Pacient is not in the bed!");
+  if (rssi <= -75 && minor == 3) {
+    Serial.println("30");
+    m2xClient.updateStreamValue(device, stream, "30");
   }
   if (rssi > -75 && minor == 2) {
-    Serial.println("Carer is nearby.");
-    m2xClient.updateStreamValue(device, stream, "Carer is nearby.");
+    Serial.println("21");
+    m2xClient.updateStreamValue(device, stream, "21");
   }
   if (rssi <= -75 && minor == 2) {
-    Serial.println("Carer is not in room.");
-    m2xClient.updateStreamValue(device, stream, "Carer is not in room.");
+    Serial.println("20");
+    m2xClient.updateStreamValue(device, stream, "20");
   }
 }
