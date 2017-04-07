@@ -12,7 +12,7 @@ int rssi = -1000;
 const char* ssid = "HackathonV4";                     //ssid of wifi network
 const char* password = "hackhack";                    //password of wifi nwetwork
 char device[] = "a77b817fbb437ad797bd23b428c47be3";   //ID of the Device you want to push to
-char stream[] = "bedSensor";                                //stream you want to push to
+char stream[] = "bedSensor";                          //stream you want to push to
 char key[] = "74f35b8acbb1f1482934f54056852d6e";      //your device API key
 
 WiFiClient client;
@@ -43,10 +43,9 @@ void loop() {
 }
 
 void ble_event(BLE_PROXIMITY_EVENT eventArgs) {
-  if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_LOST) {
-    Serial.println("No device!");
-    Serial.println("");
-  }
+  //if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_LOST) {
+  //  Serial.println("No device...");
+  //}
   if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_APPROACH) {
     major = eventArgs.device.hilo.substring(0, 4).toInt();
     minor = eventArgs.device.hilo.substring(4, 8).toInt();
@@ -56,14 +55,22 @@ void ble_event(BLE_PROXIMITY_EVENT eventArgs) {
     major = eventArgs.device.hilo.substring(0, 4).toInt();
     minor = eventArgs.device.hilo.substring(4, 8).toInt();
     rssi = eventArgs.device.rssi;
-    
+
   }
-  if (rssi > -75) {
-    Serial.print("Pacient "); Serial.print(minor); Serial.println(" is in bed.");
-    m2xClient.updateStreamValue(device, stream, "Pacient in bed");
+  if (rssi > -75 && minor == 1) {
+    Serial.println("Pacient is in the bed.");
+    m2xClient.updateStreamValue(device, stream, "Pacient is in the bed.");
   }
-  if (rssi <= -75) {
-    Serial.print("Pacient "); Serial.print(minor); Serial.println(" is not in bed!");
-    m2xClient.updateStreamValue(device, stream, "Pacient not in bed!");
+  if (rssi <= -75 && minor == 1) {
+    Serial.println("Pacient is not in the bed!");
+    m2xClient.updateStreamValue(device, stream, "Pacient is not in the bed!");
+  }
+  if (rssi > -75 && minor == 2) {
+    Serial.println("Carer is nearby.");
+    m2xClient.updateStreamValue(device, stream, "Carer is nearby.");
+  }
+  if (rssi <= -75 && minor == 2) {
+    Serial.println("Carer is not in room.");
+    m2xClient.updateStreamValue(device, stream, "Carer is not in room.");
   }
 }
