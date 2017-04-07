@@ -1,0 +1,34 @@
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\HandsonMIkeR25.exe.config
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\HandsonMIkeR25.exe
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\HandsonMIkeR25.pdb
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\ApiAiSDK.dll
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\Newtonsoft.Json.dll
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\Newtonsoft.Json.xml
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\MainWindow.g.cs
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\App.g.cs
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25_MarkupCompile.cache
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25_MarkupCompile.lref
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\MainWindow.baml
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.g.resources
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.Properties.Resources.resources
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.csproj.GenerateResource.Cache
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.exe
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.pdb
+c:\users\tabletacer\documents\visual studio 2017\Projects\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.csprojResolveAssemblyReference.cache
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\HandsonMIkeR25.exe.config
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\HandsonMIkeR25.exe
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\HandsonMIkeR25.pdb
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\ApiAiSDK.dll
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\Newtonsoft.Json.dll
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\bin\Debug\Newtonsoft.Json.xml
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.csprojResolveAssemblyReference.cache
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\MainWindow.g.cs
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\App.g.cs
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25_MarkupCompile.cache
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25_MarkupCompile.lref
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\MainWindow.baml
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.g.resources
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.Properties.Resources.resources
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.csproj.GenerateResource.Cache
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.exe
+C:\Users\tabletacer\Source\Repos\HandsonMIkeR25\HandsonMIkeR25\obj\Debug\HandsonMIkeR25.pdb
