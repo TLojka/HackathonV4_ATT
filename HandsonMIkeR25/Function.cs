@@ -10,20 +10,20 @@ namespace HandsonMIkeR25
     class Function
     {
        private static SshExec exec = new SshExec("192.168.3.21", "variscite"); // pripojenie robota Hanson n1 ROBOT A
+       
         public static void SentSad(States state)
         {
+
             string outs = "";
-            
-            exec.Password = "passowrd";
+                   
             try { 
             if (!exec.Connected)
-                exec.Connect();
-            }
-            catch(Exception e){
-                System.Console.WriteLine("ERROR WITH SSH");
-            }
-         
-            if (state == States.cold)
+                {
+                    exec.Password = "passowrd";
+                    exec.Connect();
+                }
+
+                if (state == States.cold)
             {
                 outs = exec.RunCommand("python def.py");
                 outs += exec.RunCommand("python bad.py");
@@ -49,6 +49,16 @@ namespace HandsonMIkeR25
                 outs += exec.RunCommand("python bad.py");
             }
             System.Console.WriteLine(outs);
+
+             if (state == States.ASK)
+             {
+                 outs += exec.RunCommand("python bad.py");
+             } 
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("ERROR WITH SSH " + e.Message);
+            }
         }
 
     }
@@ -62,6 +72,7 @@ namespace HandsonMIkeR25
         OK,
         warm,
         cold,
-        bad
+        bad,
+        ASK
     }
 }

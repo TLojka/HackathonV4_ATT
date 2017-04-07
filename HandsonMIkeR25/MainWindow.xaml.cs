@@ -17,6 +17,8 @@ using ApiAiSDK.Model;
 using System.Speech.Recognition;
 using System.Diagnostics;
 using System.IO;
+using System.Timers;
+using Newtonsoft.Json;
 
 namespace HandsonMIkeR25
 {
@@ -29,12 +31,30 @@ namespace HandsonMIkeR25
 
         SpeechRecognitionEngine speechRecognitionEngine = null;
         List<Words> words = new List<Words>();
+        M2X m2x = new M2X();
+
+        #region TimerCloud
+        System.Timers.Timer aTimer = new System.Timers.Timer();
+        #endregion
+
 
         public MainWindow()
         {
             InitializeComponent();
+            aTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimedEvent);
+            aTimer.Interval = 5000;
+            aTimer.Enabled = true;
+
             speechRecognitionEngine = createSpeechEngine("en-US");
             initVoicRecord();
+        }
+
+        private void AskMeSomething()
+        {
+            //check if cloud has something to say you
+            
+            string HansonReact = m2x.getData();
+            Function.SentSad(States.ASK);
         }
 
         private void initVoicRecord()
@@ -193,6 +213,8 @@ namespace HandsonMIkeR25
         }
         #endregion
 
+        #region Events
+
         private void Button_Click_Sad(object sender, RoutedEventArgs e)
         {
             Function.SentSad(States.sad);
@@ -218,5 +240,11 @@ namespace HandsonMIkeR25
             speechRecognitionEngine.RecognizeAsyncStop();
             speechRecognitionEngine.Dispose();
         }
+
+        private void OnTimedEvent(object sender, ElapsedEventArgs e)
+        {
+            AskMeSomething();
+        }
+    #endregion
     }
 }

@@ -80,6 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Function.cs" />
+    <Compile Include="M2X.cs" />
     <Compile Include="Words.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -126,6 +127,12 @@
     <Resource Include="Dictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\m2x-dot-net-master\ATTM2X\ATTM2X\ATTM2X.csproj">
+      <Project>{4a42afe7-6fdf-4a6a-9872-7009d8c1f774}</Project>
+      <Name>ATTM2X</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
