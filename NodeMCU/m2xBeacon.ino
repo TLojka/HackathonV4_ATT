@@ -13,6 +13,7 @@ const char* ssid = "HackathonV4";                     //ssid of wifi network
 const char* password = "hackhack";                    //password of wifi nwetwork
 char device[] = "a77b817fbb437ad797bd23b428c47be3";   //ID of the Device you want to push to
 char stream[] = "bedSensor";                          //stream you want to push to
+char stream2[] = "bedSensor2";                          //stream you want to push to
 char key[] = "74f35b8acbb1f1482934f54056852d6e";      //your device API key
 
 WiFiClient client;
@@ -21,6 +22,8 @@ M2XStreamClient m2xClient(&client, key);
 void ble_event(BLE_PROXIMITY_EVENT eventArgs);
 SoftwareSerial sw(D5, D6);
 CDBLEProximity ble(&sw, ble_event);
+
+int carerInRoom = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -34,7 +37,7 @@ void setup() {
   }
   Serial.println("");
   Serial.print("WiFi connected, IP address: "); Serial.println(WiFi.localIP());
-
+  Serial.print("This is beacon finder in patient bed.");
   ble.begin();
 }
 
@@ -43,9 +46,9 @@ void loop() {
 }
 
 void ble_event(BLE_PROXIMITY_EVENT eventArgs) {
-//  if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_LOST) {
-//    Serial.println("No device...");
-//  }
+  if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_LOST) {
+    carerInRoom++;
+  }
   if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_APPROACH) {
     major = eventArgs.device.hilo.substring(0, 4).toInt();
     minor = eventArgs.device.hilo.substring(4, 8).toInt();
@@ -57,22 +60,53 @@ void ble_event(BLE_PROXIMITY_EVENT eventArgs) {
     rssi = eventArgs.device.rssi;
   }
 
-  //int eventArgs.device.minorPlusRssi 
-  
-//  if (rssi > -75 && minor == 3) {
-//    Serial.println("31");
-//    m2xClient.updateStreamValue(device, stream, "31");
-//  }
-//  if (rssi <= -75 && minor == 3) {
-//    Serial.println("30");
-//    m2xClient.updateStreamValue(device, stream, "30");
-//  }
-//  if (rssi > -75 && minor == 2) {
-//    Serial.println("21");
-//    m2xClient.updateStreamValue(device, stream, "21");
-//  }
-//  if (rssi <= -75 && minor == 2) {
-//    Serial.println("20");
-//    m2xClient.updateStreamValue(device, stream, "20");
-//  }
+  String beacons = eventArgs.device.minorPlusRssi;
+  if (beacons.length() == 7) {
+    Serial.println("");
+    beacons = beacons.substring(0, 6);
+    Serial.print("First: "); Serial.println(beacons);
+    Serial.print("Beacon: "); Serial.print(beacons.substring(0, 2)); Serial.print(", Signal: "); Serial.print(beacons.substring(4, 6));
+    if (beacons.substring(0, 2) == "02"  && beacons.substring(4, 6).toInt() < 75) {
+      carerInRoom = 0;
+      Serial.println("");
+      Serial.print("One beacon, carer in the room "); Serial.println(carerInRoom);
+    }
+    if (beacons.substring(0, 2) == "02" && beacons.substring(4, 6).toInt() > 75) {
+      carerInRoom++;
+      Serial.println("");
+      Serial.print("One beacon, carer NOT in the room "); Serial.println(carerInRoom);
+    }
+  }
+  if (beacons.length() == 14) {
+    String beacon1 = beacons.substring(0, 6);
+    String beacon2 = beacons.substring(7, 13);
+    Serial.print("First: "); Serial.print(beacon1); Serial.print(", Second: "); Serial.println(beacon2);
+    if (beacon1.substring(0, 2) == "02"  && beacon1.substring(4, 6).toInt() < 75) {
+      carerInRoom = 0;
+      Serial.println("");
+      Serial.print("Two beacons, carer in the room "); Serial.println(carerInRoom);
+    }
+    if (beacon1.substring(0, 2) == "02" && beacon1.substring(4, 6).toInt() > 75) {
+      carerInRoom++;
+      Serial.println("");
+      Serial.print("Two beacons, carer NOT in the room "); Serial.println(carerInRoom);
+    }
+    if (beacon2.substring(0, 2) == "02"  && beacon2.substring(4, 6).toInt() < 75) {
+      carerInRoom = 0;
+      Serial.println("");
+      Serial.print("Two beacons, carer in the room "); Serial.println(carerInRoom);
+    }
+    if (beacon2.substring(0, 2) == "02" && beacon2.substring(4, 6).toInt() > 75) {
+      carerInRoom++;
+      Serial.println("");
+      Serial.print("Two beacons, carer NOT in the room "); Serial.println(carerInRoom);
+    }
+  }
+
+  if (carerInRoom >= 5) {
+    m2xClient.updateStreamValue(device, stream, "0");
+  }
+  if (carerInRoom < 5) {
+    m2xClient.updateStreamValue(device, stream, "1");
+  }
 }
