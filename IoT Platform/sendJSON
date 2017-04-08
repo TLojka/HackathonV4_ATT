@@ -8,8 +8,8 @@
 const char* ssid = "HackathonV4";
 const char* password = "hackhack";
 
-#define DHTPIN D2 
-#define DHTTYPE DHT11 
+#define DHTPIN D2
+#define DHTTYPE DHT11
 #define ORG "adqo9n"
 #define DEVICE_TYPE "ESP"
 #define DEVICE_ID "ESP-PIR"
@@ -54,7 +54,7 @@ float t = 0;
 void loop() {
 
   counter++;
-  photoResistor += map(analogRead(A0),0,1023,100,0);
+  photoResistor += map(analogRead(A0), 0, 1023, 100, 0);
   h = dht.readHumidity();
   t = dht.readTemperature();
 
@@ -63,6 +63,8 @@ void loop() {
   }
 
   if (counter == 100) {
+
+    digitalWrite(D3, LOW);
 
     if (!client.connected()) {
       Serial.print("Reconnecting client to ");
@@ -79,7 +81,7 @@ void loop() {
     }
     else {
       movement = 1;
-    }    
+    }
 
     String payload = "{\"d\":{\"Name\":\"ESP\"";
     payload += ",\"Activity\":";
@@ -87,7 +89,7 @@ void loop() {
     payload += ",\"Value\":";
     payload += counterPIR;
     payload += ",\"Lights\":";
-    payload += photoResistor/counter;
+    payload += photoResistor / counter;
     payload += ",\"Humidity\":";
     payload += h;
     payload += ",\"Temperature\":";
@@ -103,8 +105,10 @@ void loop() {
 
     if (client.publish(topic, (char*) payload.c_str())) {
       Serial.println("Publish ok");
+      digitalWrite(D3, HIGH);
     } else {
       Serial.println("Publish failed");
+      digitalWrite(D3, LOW);
     }
 
   }
