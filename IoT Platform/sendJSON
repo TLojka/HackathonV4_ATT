@@ -81,12 +81,12 @@ void loop() {
       movement = 1;
     }    
 
-    String payload = "{\"d\":{\"Name\":\"ESP-PIR\"";
+    String payload = "{\"d\":{\"Name\":\"ESP\"";
     payload += ",\"Activity\":";
     payload += movement;
     payload += ",\"Value\":";
     payload += counterPIR;
-    payload += ",\"Light\":";
+    payload += ",\"Lights\":";
     payload += photoResistor/counter;
     payload += ",\"Humidity\":";
     payload += h;
