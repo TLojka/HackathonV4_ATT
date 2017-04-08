@@ -25,9 +25,11 @@ namespace HandsonMIkeR25
 
                 if (state == States.cold)
             {
-                outs = exec.RunCommand("python def.py");
-                outs += exec.RunCommand("python bad.py");
-            }
+                    outs += exec.RunCommand("python sadFace.py");
+                    outs = exec.RunCommand("python bad.py");
+                    
+
+                }
             if (state == States.warm)
             {
                     outs = exec.RunCommand("python fine.py");
@@ -43,6 +45,12 @@ namespace HandsonMIkeR25
             if (state == States.OK)
             {
                 outs = exec.RunCommand("python fine.py");
+                    System.Threading.Thread.Sleep(500);
+                    outs += exec.RunCommand("python happyFace.py");
+                }
+             if (state == States.happy)
+                {
+                    outs = exec.RunCommand("python fine.py");
                     System.Threading.Thread.Sleep(500);
                     outs += exec.RunCommand("python happyFace.py");
                 }
@@ -63,8 +71,15 @@ namespace HandsonMIkeR25
 
              if (state == States.ASK)
              {
-                 outs += exec.RunCommand("python bad.py");
-             } 
+                 outs = exec.RunCommand("python bad.py");
+                    System.Threading.Thread.Sleep(500);
+                }
+
+                if (state == States.HA)
+                {
+                    outs = exec.RunCommand("python howAreYou.py");
+                    System.Threading.Thread.Sleep(500);
+                }
             }
             catch (Exception e)
             {
@@ -84,6 +99,7 @@ namespace HandsonMIkeR25
         warm,
         cold,
         bad,
-        ASK
+        ASK,
+        HA,
     }
 }

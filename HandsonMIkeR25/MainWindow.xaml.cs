@@ -42,8 +42,8 @@ namespace HandsonMIkeR25
         {
             InitializeComponent();
             aTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimedEvent);
-            aTimer.Interval = 5000;
-          //  aTimer.Enabled = true;
+            aTimer.Interval = 3000;
+            aTimer.Enabled = true;
 
             speechRecognitionEngine = createSpeechEngine("en-US");
             initVoicRecord();
@@ -204,6 +204,9 @@ namespace HandsonMIkeR25
                     case "pain":
                         Function.SentSad(States.sad);
                         break;
+                    case "happy":
+                        Function.SentSad(States.happy);
+                        break;
                 }
             });
         }
@@ -291,6 +294,11 @@ namespace HandsonMIkeR25
         {
             AskMeSomething();
         }
-    #endregion
+        #endregion
+
+        private void Button_Click__HowAreYou(object sender, RoutedEventArgs e)
+        {
+            Function.SentSad(States.HA);
+        }
     }
 }
