@@ -171,13 +171,52 @@ namespace HandsonMIkeR25
         #endregion
 
         #region speechEngine events
+        void engine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            string text_ = getKnownTextOrExecute(e.Result.Text);
+            txtSpoken.Text += "\r" + text_;
+            processText(text_);
+            scvText.ScrollToEnd();
+        }
+        private async void processText(String text)
+        {
+            await Task.Run(() => {
+                switch (text)
+                {
+                    case "warm":
+                        Function.SentSad(States.warm);
+                        break;
+                    case "cold":
+                        Function.SentSad(States.cold);
+                        break;
+                    case "confident":
+                        Function.SentSad(States.confident);
+                        break;
+                    case "OK":
+                        Function.SentSad(States.OK);
+                        break;
+                    case "bad":
+                        Function.SentSad(States.bad);
+                        break;
+                    case "sad":
+                        Function.SentSad(States.sad);
+                        break;
+                    case "pain":
+                        Function.SentSad(States.sad);
+                        break;
+                }
+            });
+        }
+
+
+
 
         /// <summary>
         /// Handles the SpeechRecognized event of the engine control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Speech.Recognition.SpeechRecognizedEventArgs"/> instance containing the event data.</param>
-        void engine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+      /*  void engine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             string text_= getKnownTextOrExecute(e.Result.Text);
             txtSpoken.Text += "\r" + text_;
@@ -197,10 +236,16 @@ namespace HandsonMIkeR25
                 case "bad":
                     Function.SentSad(States.bad);
                     break;
+                case "sad":
+                    Function.SentSad(States.sad);
+                    break;
+                case "pain":
+                    Function.SentSad(States.sad);
+                    break;
             }
 
             scvText.ScrollToEnd();
-        }
+        }*/
 
         /// <summary>
         /// Handles the AudioLevelUpdated event of the engine control.

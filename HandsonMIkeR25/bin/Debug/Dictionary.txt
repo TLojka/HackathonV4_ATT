@@ -2,14 +2,14 @@
 -- [text to recognize] | [text to display or execute] | [is text a command?]
 
 -- simple text --
-sad|you said "sad"|false
-happy|you said "happy"|false
-confident|you said "confident"|false
-pain|you said "pain"|false
-OK|you said "OK"|false
-warm|you said "warm"|false
-cold|you said "cold"|false
-bad|you said "bad"|false
+sad|sad|false
+happy|happy|false
+confident|confident|false
+pain|pain|false
+OK|OK|false
+warm|warm|false
+cold|cold|false
+bad|bad|false
 Patrick|you said "Patrick"|false
 
 -- commands --

@@ -9,7 +9,7 @@ namespace HandsonMIkeR25
 {
     class Function
     {
-       private static SshExec exec = new SshExec("192.168.3.15", "variscite"); // pripojenie robota Hanson n1 ROBOT A
+       private static SshExec exec = new SshExec("192.168.3.4", "variscite"); // pripojenie robota Hanson n1 ROBOT A
        
         public static void SentSad(States state)
         {
