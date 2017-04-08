@@ -59,8 +59,7 @@ namespace HackathonBrno
                     e.Myo.AccelerometerDataAcquired += Myo_Accelerometer;
                     e.Myo.EmgDataAcquired += MyoEmgDataHandler;
                     e.Myo.SetEmgStreaming(true);
-                    e.Myo.PoseChanged += poseHandler;
-                    // e.Myo.Unlock(UnlockType.Hold);
+                    e.Myo.Lock();
                 };
 
                 // disabling myo listening and handlers
@@ -69,7 +68,6 @@ namespace HackathonBrno
                     Console.WriteLine("Myo was disconnected, data logging wont work.", e.Myo.Arm);
                     e.Myo.AccelerometerDataAcquired -= Myo_Accelerometer;
                     e.Myo.EmgDataAcquired -= MyoEmgDataHandler;
-                    e.Myo.PoseChanged -= poseHandler;
                 };
 
                 // start listening for Myo data
@@ -168,7 +166,6 @@ namespace HackathonBrno
                 taskRunning = true;
                 emgCounter = 0;
                 List<List<int>> emgTask = new List<List<int>>(emgList);
-                var task = Task.Factory.StartNew(() => {
                     double averageCounter=0;
                     foreach(var list in emgTask)
                     {
@@ -188,17 +185,13 @@ namespace HackathonBrno
                     }
                     Console.WriteLine(averageCounter);
                     taskRunning = false;
-                });
+                
                 foreach (var list in emgList)
                 {
                     list.Clear();
                 }
             }
             emgCounter++;
-
-        }
-        private static void poseHandler(object sender,PoseEventArgs e)
-        {
 
         }
 
