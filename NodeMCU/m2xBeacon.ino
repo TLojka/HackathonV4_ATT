@@ -23,7 +23,8 @@ void ble_event(BLE_PROXIMITY_EVENT eventArgs);
 SoftwareSerial sw(D5, D6);
 CDBLEProximity ble(&sw, ble_event);
 
-int carerInRoom = 0;
+int carerNotNearPatient = 0;
+int patientNotInBed = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -47,7 +48,7 @@ void loop() {
 
 void ble_event(BLE_PROXIMITY_EVENT eventArgs) {
   if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_LOST) {
-    carerInRoom++;
+    carerNotNearPatient++;
   }
   if (eventArgs.eventID == BLE_EVENT_ON_DEVICE_APPROACH) {
     major = eventArgs.device.hilo.substring(0, 4).toInt();
@@ -67,14 +68,24 @@ void ble_event(BLE_PROXIMITY_EVENT eventArgs) {
     Serial.print("First: "); Serial.println(beacons);
     Serial.print("Beacon: "); Serial.print(beacons.substring(0, 2)); Serial.print(", Signal: "); Serial.print(beacons.substring(4, 6));
     if (beacons.substring(0, 2) == "02"  && beacons.substring(4, 6).toInt() < 75) {
-      carerInRoom = 0;
+      carerNotNearPatient = 0;
       Serial.println("");
-      Serial.print("One beacon, carer in the room "); Serial.println(carerInRoom);
+      Serial.print("One beacon, carer near patient "); Serial.println(carerNotNearPatient);
     }
     if (beacons.substring(0, 2) == "02" && beacons.substring(4, 6).toInt() > 75) {
-      carerInRoom++;
+      carerNotNearPatient++;
       Serial.println("");
-      Serial.print("One beacon, carer NOT in the room "); Serial.println(carerInRoom);
+      Serial.print("One beacon, carer NOT near patient "); Serial.println(carerNotNearPatient);
+    }
+    if (beacons.substring(0, 2) == "03"  && beacons.substring(4, 6).toInt() < 75) {
+      patientNotInBed = 0;
+      Serial.println("");
+      Serial.print("One beacon, patient in the bed "); Serial.println(patientNotInBed);
+    }
+    if (beacons.substring(0, 2) == "03" && beacons.substring(4, 6).toInt() > 75) {
+      patientNotInBed++;
+      Serial.println("");
+      Serial.print("One beacon, patient not in the bed "); Serial.println(patientNotInBed);
     }
   }
   if (beacons.length() == 14) {
@@ -82,31 +93,51 @@ void ble_event(BLE_PROXIMITY_EVENT eventArgs) {
     String beacon2 = beacons.substring(7, 13);
     Serial.print("First: "); Serial.print(beacon1); Serial.print(", Second: "); Serial.println(beacon2);
     if (beacon1.substring(0, 2) == "02"  && beacon1.substring(4, 6).toInt() < 75) {
-      carerInRoom = 0;
+      carerNotNearPatient = 0;
       Serial.println("");
-      Serial.print("Two beacons, carer in the room "); Serial.println(carerInRoom);
+      Serial.print("Two beacons, carer near patient "); Serial.println(carerNotNearPatient);
     }
     if (beacon1.substring(0, 2) == "02" && beacon1.substring(4, 6).toInt() > 75) {
-      carerInRoom++;
+      carerNotNearPatient++;
       Serial.println("");
-      Serial.print("Two beacons, carer NOT in the room "); Serial.println(carerInRoom);
+      Serial.print("Two beacons, carer NOT near patient "); Serial.println(carerNotNearPatient);
     }
     if (beacon2.substring(0, 2) == "02"  && beacon2.substring(4, 6).toInt() < 75) {
-      carerInRoom = 0;
+      carerNotNearPatient = 0;
       Serial.println("");
-      Serial.print("Two beacons, carer in the room "); Serial.println(carerInRoom);
+      Serial.print("Two beacons, carer near patient "); Serial.println(carerNotNearPatient);
     }
     if (beacon2.substring(0, 2) == "02" && beacon2.substring(4, 6).toInt() > 75) {
-      carerInRoom++;
+      carerNotNearPatient++;
       Serial.println("");
-      Serial.print("Two beacons, carer NOT in the room "); Serial.println(carerInRoom);
+      Serial.print("Two beacons, carer NOT near patient "); Serial.println(carerNotNearPatient);
+    }
+    if (beacon1.substring(0, 2) == "03"  && beacon1.substring(4, 6).toInt() < 75) {
+      patientNotInBed = 0;
+      Serial.println("");
+      Serial.print("Two beacons, carer near patient "); Serial.println(patientNotInBed);
+    }
+    if (beacon1.substring(0, 2) == "03" && beacon1.substring(4, 6).toInt() > 75) {
+      patientNotInBed++;
+      Serial.println("");
+      Serial.print("Two beacons, carer NOT near patient "); Serial.println(patientNotInBed);
+    }
+    if (beacon2.substring(0, 2) == "03"  && beacon2.substring(4, 6).toInt() < 75) {
+      patientNotInBed = 0;
+      Serial.println("");
+      Serial.print("Two beacons, carer near patient "); Serial.println(patientNotInBed);
+    }
+    if (beacon2.substring(0, 2) == "03" && beacon2.substring(4, 6).toInt() > 75) {
+      patientNotInBed++;
+      Serial.println("");
+      Serial.print("Two beacons, carer NOT near patient "); Serial.println(patientNotInBed);
     }
   }
 
-  if (carerInRoom >= 5) {
-    m2xClient.updateStreamValue(device, stream, "0");
+  if (carerNotNearPatient >= 5) {
+    m2xClient.updateStreamValue(device, stream2, "0");
   }
-  if (carerInRoom < 5) {
-    m2xClient.updateStreamValue(device, stream, "1");
+  if (carerNotNearPatient < 5) {
+    m2xClient.updateStreamValue(device, stream2, "1");
   }
 }
