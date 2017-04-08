@@ -43,7 +43,7 @@ namespace HandsonMIkeR25
             InitializeComponent();
             aTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimedEvent);
             aTimer.Interval = 5000;
-            aTimer.Enabled = true;
+          //  aTimer.Enabled = true;
 
             speechRecognitionEngine = createSpeechEngine("en-US");
             initVoicRecord();
@@ -54,7 +54,8 @@ namespace HandsonMIkeR25
             //check if cloud has something to say you
             
             string HansonReact = m2x.getData();
-            Function.SentSad(States.ASK);
+            if(HansonReact == "fall")
+                Function.SentSad(States.ASK);
         }
 
         private void initVoicRecord()

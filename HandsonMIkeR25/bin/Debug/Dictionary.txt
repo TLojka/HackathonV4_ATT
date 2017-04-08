@@ -9,6 +9,7 @@ pain|you said "pain"|false
 OK|you said "OK"|false
 warm|you said "warm"|false
 cold|you said "cold"|false
+bad|you said "bad"|false
 Patrick|you said "Patrick"|false
 
 -- commands --

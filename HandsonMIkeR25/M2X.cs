@@ -16,17 +16,30 @@ namespace HandsonMIkeR25
         M2XStream stream;
         private static M2XResponse response;
         DateTime limit;
+        DateTime lastFall;
 
         public String getData() {
-            stream = device.Stream("patientMove");
+            stream = device.Stream("hasFallen");
+            string a="";
 
-            response = stream.Values(new ATTM2X.Classes.StreamValuesFilter { start = M2XClient.DateTimeToString(DateTime.UtcNow.AddSeconds(-5)) }, M2XStreamValuesFormat.Json).Result;
+            response = stream.Values(new ATTM2X.Classes.StreamValuesFilter { start = M2XClient.DateTimeToString(DateTime.UtcNow.AddMinutes(-3)) }, M2XStreamValuesFormat.Json).Result;
             var data = response.Json<StreamValues>();
 
-            if (DateTime.Compare(limit, Convert.ToDateTime(data.end)) > 0)
+            if (DateTime.Compare(limit, Convert.ToDateTime(data.end)) < 0)
             {
-                string a = data.values[0].value;
+                if (data.values.Length != 0)
+                {
+                    TimeSpan span = (Convert.ToDateTime(data.values[0].timestamp) - lastFall);
+                    if (span.Seconds > 30 ) { 
+                    a = data.values[0].value;
+                        if (a == "fall")
+                            lastFall = Convert.ToDateTime(data.values[0].timestamp);
+                            System.Console.WriteLine("FALLLL---------------------------------/////////");
+                    }
+                }
             }
+            else
+                a = "";
 
             limit = Convert.ToDateTime(data.end);
 

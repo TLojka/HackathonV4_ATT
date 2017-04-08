@@ -9,7 +9,7 @@ namespace HandsonMIkeR25
 {
     class Function
     {
-       private static SshExec exec = new SshExec("192.168.3.21", "variscite"); // pripojenie robota Hanson n1 ROBOT A
+       private static SshExec exec = new SshExec("192.168.3.15", "variscite"); // pripojenie robota Hanson n1 ROBOT A
        
         public static void SentSad(States state)
         {
@@ -19,7 +19,7 @@ namespace HandsonMIkeR25
             try { 
             if (!exec.Connected)
                 {
-                    exec.Password = "passowrd";
+                    exec.Password = "password";
                     exec.Connect();
                 }
 
@@ -30,25 +30,36 @@ namespace HandsonMIkeR25
             }
             if (state == States.warm)
             {
-                outs = exec.RunCommand("python def.py");
-                outs += exec.RunCommand("python fine.py");
-            }
+                    outs = exec.RunCommand("python fine.py");
+                    System.Threading.Thread.Sleep(500);
+                    outs += exec.RunCommand("python happyFace.py");
+                }
             if (state == States.confident)
             {
-                outs = exec.RunCommand("python happy.py");
-                outs += exec.RunCommand("python fine.py");
-            }
+                    outs = exec.RunCommand("python fine.py");
+                    System.Threading.Thread.Sleep(500);
+                    outs += exec.RunCommand("python happyFace.py");
+                }
             if (state == States.OK)
             {
-                outs = exec.RunCommand("python happy.py");
-                outs += exec.RunCommand("python fine.py");
-            }
-            if (state == States.bad)
-            {
-                outs = exec.RunCommand("python happy.py");
-                outs += exec.RunCommand("python bad.py");
-            }
-            System.Console.WriteLine(outs);
+                outs = exec.RunCommand("python fine.py");
+                    System.Threading.Thread.Sleep(500);
+                    outs += exec.RunCommand("python happyFace.py");
+                }
+                if (state == States.sad)
+                {
+                    outs = exec.RunCommand("python bad.py");
+                    System.Threading.Thread.Sleep(500);
+                    outs += exec.RunCommand("python sadFace.py");
+                }
+
+                if (state == States.bad)
+                {
+                    outs = exec.RunCommand("python bad.py");
+                    System.Threading.Thread.Sleep(500);
+                    outs += exec.RunCommand("python sadFace.py");
+                }
+                System.Console.WriteLine(outs);
 
              if (state == States.ASK)
              {
