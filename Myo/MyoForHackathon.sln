@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyoCode", "HackathonBrno\MyoCode.csproj", "{C11D1769-30CA-46D8-8875-B7FDF166CF24}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyoSharp", "packages\MyoSharp-master\MyoSharp\MyoSharp.csproj", "{B075C7E9-FE48-4508-B44C-1A259BCC8B22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyoSharp.ConsoleSample", "packages\MyoSharp-master\MyoSharp.ConsoleSample\MyoSharp.ConsoleSample.csproj", "{27DA6BB8-8526-437E-9293-A877FC175653}"
@@ -15,16 +13,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyoSharp.Tests.Unit", "pack
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATTM2X", "packages\m2x-dot-net-master\ATTM2X\ATTM2X\ATTM2X.csproj", "{4A42AFE7-6FDF-4A6A-9872-7009D8C1F774}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyoCode", "MyoForHackathon\MyoCode.csproj", "{C11D1769-30CA-46D8-8875-B7FDF166CF24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C11D1769-30CA-46D8-8875-B7FDF166CF24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C11D1769-30CA-46D8-8875-B7FDF166CF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C11D1769-30CA-46D8-8875-B7FDF166CF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C11D1769-30CA-46D8-8875-B7FDF166CF24}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B075C7E9-FE48-4508-B44C-1A259BCC8B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B075C7E9-FE48-4508-B44C-1A259BCC8B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B075C7E9-FE48-4508-B44C-1A259BCC8B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{4A42AFE7-6FDF-4A6A-9872-7009D8C1F774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A42AFE7-6FDF-4A6A-9872-7009D8C1F774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A42AFE7-6FDF-4A6A-9872-7009D8C1F774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C11D1769-30CA-46D8-8875-B7FDF166CF24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11D1769-30CA-46D8-8875-B7FDF166CF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11D1769-30CA-46D8-8875-B7FDF166CF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11D1769-30CA-46D8-8875-B7FDF166CF24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

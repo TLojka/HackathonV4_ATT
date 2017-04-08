@@ -11,10 +11,9 @@ int rssi = -1000;
 
 const char* ssid = "HackathonV4";                     //ssid of wifi network
 const char* password = "hackhack";                    //password of wifi nwetwork
-char device[] = "a77b817fbb437ad797bd23b428c47be3";   //ID of the Device you want to push to
-char stream[] = "bedSensor";                          //stream you want to push to
-char stream2[] = "bedSensor2";                          //stream you want to push to
-char key[] = "74f35b8acbb1f1482934f54056852d6e";      //your device API key
+char device[] = "10aed5a52a0427c201de7c82f46b57fb";   //ID of the Device you want to push to
+char stream[] = "carerRoom";                          //stream you want to push to
+char key[] = "43767d8087571134a3d9e11092b55d0c";      //your device API key
 
 WiFiClient client;
 M2XStreamClient m2xClient(&client, key);
@@ -37,7 +36,7 @@ void setup() {
   }
   Serial.println("");
   Serial.print("WiFi connected, IP address: "); Serial.println(WiFi.localIP());
-  Serial.print("This is beacon finder in patient bed.");
+  Serial.print("This is beacon finder in carer room.");
   ble.begin();
 }
 

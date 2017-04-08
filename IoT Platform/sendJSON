@@ -1,10 +1,15 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h> // https://github.com/knolleary/pubsubclient/releases/tag/v2.3
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
+#include <DHT_U.h>
 
 //-------- Customise these values -----------
 const char* ssid = "HackathonV4";
 const char* password = "hackhack";
 
+#define DHTPIN D2 
+#define DHTTYPE DHT11 
 #define ORG "adqo9n"
 #define DEVICE_TYPE "ESP"
 #define DEVICE_ID "ESP-PIR"
@@ -19,6 +24,8 @@ char clientId[] = "d:" ORG ":" DEVICE_TYPE ":" DEVICE_ID;
 
 WiFiClient wifiClient;
 PubSubClient client(server, 1883, NULL, wifiClient);
+
+DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   Serial.begin(115200);
@@ -40,11 +47,16 @@ void setup() {
 int counter = 0;
 int counterPIR = 0;
 int movement = 0;
-
+int photoResistor = 0;
+float h = 0;
+float t = 0;
 
 void loop() {
 
   counter++;
+  photoResistor += map(analogRead(A0),0,1023,100,0);
+  h = dht.readHumidity();
+  t = dht.readTemperature();
 
   if (digitalRead(D1) == 1) {
     counterPIR++;
@@ -67,14 +79,19 @@ void loop() {
     }
     else {
       movement = 1;
-    }
-
+    }    
 
     String payload = "{\"d\":{\"Name\":\"ESP-PIR\"";
     payload += ",\"Activity\":";
     payload += movement;
     payload += ",\"Value\":";
     payload += counterPIR;
+    payload += ",\"Light\":";
+    payload += photoResistor/counter;
+    payload += ",\"Humidity\":";
+    payload += h;
+    payload += ",\"Temperature\":";
+    payload += t;
     payload += "}}";
 
     Serial.print("Sending payload: ");
@@ -82,6 +99,7 @@ void loop() {
 
     counter = 0;
     counterPIR = 0;
+    photoResistor = 0;
 
     if (client.publish(topic, (char*) payload.c_str())) {
       Serial.println("Publish ok");
